@@ -49,26 +49,75 @@ R graphics engine version 14 is not supported by this version of RStudio. The Pl
 checked installation with library(swirl) and received:
 | Hi! Type swirl() when you are ready to begin.
 
----------------stopped here
-
 ## 4. Tex software for creating PDF documents.
 
-### Mac
-
-Download and install MacText from https://tug.org/mactex/
-
-This was very large when I downloaded it: 7GB!
-
-
-### Windows
-
-Download and install MiKTeX from http://miktex.org
+Downloaded MiKTeX from http://miktex.org
+downloaded executable & installer. Downloaded Tex to C:\Users\Shady\AppData\Local\Programs\MiKTeX
+options chosen:
+- A4 paper
+- ask me first before installing packages
 
 ### Create the RMarkdown to PDF
 
-**Go back to RStudio**
+had to install package markdown
+- gave output but it disappeared and brought up the markdown window. 
 
-Record in your notes where you downloaded the Tex from, and any errors or whether it was successful.
+gave the following output:
+processing file: knit_test.Rmd
+  |..........                                                            |  14%
+  ordinary text without R code
+
+  |....................                                                  |  29%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |..............................                                        |  43%
+  ordinary text without R code
+
+  |........................................                              |  57%
+label: cars
+  |..................................................                    |  71%
+  ordinary text without R code
+
+  |............................................................          |  86%
+label: pressure (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |......................................................................| 100%
+  ordinary text without R code
+
+
+"C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS knit_test.knit.md --to latex --from markdown+autolink_bare_uris+tex_math_single_backslash --output knit_test.tex --lua-filter "C:\Users\Shady\Documents\R\win-library\4.1\rmarkdown\rmarkdown\lua\pagebreak.lua" --lua-filter "C:\Users\Shady\Documents\R\win-library\4.1\rmarkdown\rmarkdown\lua\latex-div.lua" --self-contained --highlight-style tango --pdf-engine pdflatex --variable graphics --variable "geometry:margin=1in" 
+output file: knit_test.knit.md
+
+! Sorry, but C:\Users\Shady\AppData\Local\Programs\MiKTeX\miktex\bin\x64\pdflatex.exe did not succeed.
+
+! The log file hopefully contains the information to get MiKTeX going again:
+
+!   C:\Users\Shady\AppData\Local\MiKTeX\miktex\log\pdflatex.log
+
+! pdflatex: major issue: So far, you have not checked for MiKTeX updates.
+
+Error: LaTeX failed to compile knit_test.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See knit_test.log for more info.
+Execution halted
+
+so it FAILED.
+
+trying again by restarting RStudio and starting from the beginning (File -> New File...)
+- this gave the same output
+
+I've had issues with using R in OneDrive directories, so I tried in a directory outside of OneDrive. Same result given. Seems to be an issue with the Tex software
+
+Bc all the log files say I haven't checked for updates, I'm checking now on the app for MiKTeX.
+- there are a lot of updates that are required. I'm doing this and then will try Rmarkdown again
+- gave same output & error as before. Will look into this tomorrow before class. 
+
+
+-----------------------------------------------------------------stopped here
+
+
 
 Now try to create a test document from RStudio. **Go to File -> New File -> Rmarkdown...**
 
@@ -81,39 +130,14 @@ It will open a file for editing, but j_ust click on the ball of yarn with the wo
 If it didn't work, try restarting RStudio and repeat the "Create the RMarkdown to PDF" steps. Record in your notebook if this is necessary.
 
 ## 5. Install more R packages.
+tidyverse - installed. when used libary(), gave the following conflicts:
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
 
-Now you will install R libaries that we'll use in class. There can be a lot of messages here, so they don't need to go into your notebook. **the thing to record is anything that says "ERROR".** 
+BiocManager - installed. had to restart R due to loading packages in tidyverse that were dependencies in BiocManager
 
-### Common messages
- * Warnings. "Warning" is OK and fairly common.
- * `The package blahblah is not available for your version of R.` This doesn't mean what it implies- that there are other versions that _do_ have that package. It most likely just means you mistyped the package name. eyeroll.
- * Out of date packages. `Do you want to update packages that have a newer version? All / Some / None?` **Choose None.**
- * `Do you want to compile from source packages that have a newer version.` **No.**
- * `Choose a local mirror` for download. If you get this, it might list ~100 locations to download from. Look for the one in Kansas (it's slightly closer than Iowa). 
-
-
-### Find your console again, and do the following:
-
-Record in your notes each packages name and whether it was sucessful, but there can be verbose output to sift through. Just be on the look out for ERRORS (tend to be red).
-
-```r
-install.packages("tidyverse")
-library(tidyverse)
-```
-
-```r
-install.packages("BiocManager")
-library(BiocManager)
-```
-
-To install from Bioconductor, we use a slightly different install command.
-
-```r
-BiocManager::install("biomaRt")
-library(biomaRt)
-```
-
-
+biomaRt - installed. Chose 'n' when asked whether I wanted to update other packages. not sure why this was the choice wanted, though. maybe other packages installed
+are shared in this one and therefore the most recent one was downloaded?
 
 ## 6. Compilers for R source packages
 
