@@ -114,20 +114,10 @@ Bc all the log files say I haven't checked for updates, I'm checking now on the 
 - there are a lot of updates that are required. I'm doing this and then will try Rmarkdown again
 - gave same output & error as before. Will look into this tomorrow before class. 
 
+LaTex is a dependency of MiKTeX. Looked into why it wouldn't work, and kept running into related issues with tinytex, so I tried the following line:
+tinytex::install_tinytex()
 
------------------------------------------------------------------stopped here
-
-
-
-Now try to create a test document from RStudio. **Go to File -> New File -> Rmarkdown...**
-
-You (probably) will be prompted to install a package. Do so. Record in your notebook the package name and any output from that step. 
-
-Now, create a new Rmarkdown file. Leave it "Untitled", but **change the default output format to PDF.** 
-
-It will open a file for editing, but j_ust click on the ball of yarn with the word Knit next to it_. Save it as knit_test. This should open a new window with the document in PDF format. **Record whether you see this document, or any errors that might have popped up in the console.**
-
-If it didn't work, try restarting RStudio and repeat the "Create the RMarkdown to PDF" steps. Record in your notebook if this is necessary.
+and libraried it. Ran it again and the PDF was created. Weird bc my output did not give the same error message as everyone else this worked for, but it still worked for me.
 
 ## 5. Install more R packages.
 tidyverse - installed. when used libary(), gave the following conflicts:
